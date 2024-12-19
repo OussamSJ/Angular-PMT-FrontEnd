@@ -1,0 +1,85 @@
+$hover-darken-percent: 10%;
+$default-color: #004085; // Bleu
+$btn-danger-bg: #dc3545; // Rouge pour le bouton
+$text-color-light: #ffffff; // Blanc
+$text-color-dark: #212529; // Noir
+
+.pokemon-item {
+  background-color: $default-color;
+  color: $text-color-light;
+  border: 1px solid lighten($default-color, 20%);
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, background-color 0.3s ease;
+  padding: 15px;
+  
+  &:hover {
+    cursor: pointer;
+    transform: translateY(-3px);
+    background-color: darken($default-color, $hover-darken-percent);
+  }
+
+  .pokemon-name {
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: lighten($default-color, 20%);
+  }
+
+  .pokemon-dates {
+    margin-bottom: 1.5rem;
+    
+    p {
+      font-size: 1.1rem;
+      margin: 0.5rem 0;
+      color: $text-color-light;
+      strong {
+        font-weight: bold;
+        color: lighten($default-color, 20%);
+      }
+    }
+  }
+
+  .pokemon-description {
+    margin-top: 1rem;
+    
+    h6 {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: lighten($default-color, 30%);
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+      color: $text-color-light;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+  }
+
+  .btn-danger {
+    background-color: $btn-danger-bg;
+    border-color: $btn-danger-bg;
+
+    &:hover {
+      background-color: darken($btn-danger-bg, $hover-darken-percent);
+      border-color: darken($btn-danger-bg, $hover-darken-percent);
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .pokemon-item {
+    flex-direction: column;
+
+    .col-9, .col-3 {
+      flex: 100%;
+      text-align: center;
+    }
+
+    .btn-danger {
+      margin-top: 1rem;
+    }
+  }
+}

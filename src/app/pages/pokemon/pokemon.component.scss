@@ -1,0 +1,28 @@
+.pokemon-details {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  
+    h1 {
+      font-size: 1.8rem;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+  
+    p {
+      font-size: 1rem;
+      margin: 8px 0;
+      line-height: 1.6;
+  
+      strong {
+        color: #333;
+      }
+    }
+  
+    .text-primary {
+      color: #007bff; /* Couleur principale */
+    }
+  }
+  

@@ -1,0 +1,37 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+@import 'bootstrap/scss/bootstrap';
+
+:root {
+  .navbar-brand {
+    --bs-navbar-brand-color: white;
+    --bs-navbar-brand-hover-color: white;
+  }
+}
+
+input.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+
+.invalid-feedback {
+  display: block;
+}
+
+.centerer {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.list-centerer {
+  @extend .centerer;
+  min-height: 200px;
+}
+
+.page-centerer {
+  @extend .centerer;
+  height: 100vh;
+}

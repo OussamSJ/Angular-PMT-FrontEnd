@@ -1,0 +1,82 @@
+<app-header />
+
+<div class="container mt-4">
+
+  <h3 class="mb-5">Ajouter des projets</h3>
+
+  <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+    <div class="row mb-4">
+    <!-- Champ " nom de projet" -->
+      <div class="col-9 mb-2">
+        <input type="text" class="form-control" formControlName="name" placeholder="nom du projet" />
+        <div class="invalid-feedback" *ngIf="name.touched && name.invalid && name.errors">
+          <ng-container *ngIf="name.errors['required']">
+            Le nom ne peut pas être vide
+          </ng-container>
+        </div>
+      </div>
+
+
+
+
+            <!-- Champ "Date de début" -->
+    <div class="col-4 ">
+      <label for="debutDate">Date de début</label>
+      <input type="date" class="form-control" id="debutDate" formControlName="debutDate" />
+      <div class="invalid-feedback" *ngIf="debutDate.touched && debutDate.invalid && debutDate.errors">
+        <ng-container *ngIf="debutDate.errors['required']">
+          La date de début est obligatoire
+        </ng-container>
+      </div>
+    </div>
+
+          <!-- Champ "Date de fin" -->
+          <div class="col-4 mb-2">
+            <label for="finDate">Date de fin</label>
+            <input type="date" class="form-control" id="finDate" formControlName="finDate" />
+            <div class="invalid-feedback" *ngIf="finDate.touched && finDate.invalid && finDate.errors">
+              <ng-container *ngIf="finDate.errors['required']">
+                La date de fin est obligatoire
+              </ng-container>
+            </div>
+          </div>
+
+          <!-- Champ " description " -->
+      <div class="col-9 mb-5">
+      <input type="text" class="form-control" formControlName="description" placeholder="Description"  style="height: 100px;" />
+      <div class="invalid-feedback" *ngIf="description.touched && description.invalid && description.errors">
+        <ng-container *ngIf="description.errors['required']">
+          La description ne peut pas être vide
+        </ng-container>
+      </div>
+      </div>
+
+
+
+
+      <div class="mb-5">
+        <button type="submit" class="btn btn-primary">Ajouter</button>
+      </div>
+
+    </div>
+  </form>
+
+
+  <h3 class="mb-5">Liste des projets</h3>
+  <div class="list-centerer" *ngIf="isLoading || pokemons.length === 0">
+    <div class="spinner-border text-primary" role="status" *ngIf="isLoading">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <div *ngIf="!isLoading && pokemons.length === 0">
+      Aucun pokemon
+    </div>
+  </div>
+
+
+  <ng-container *ngIf="!isLoading">
+    <div class=" col-9 mb-3">
+    <app-pokemon-item (click)="goToPokemonPage(index)"  *ngFor="let pokemon of pokemons; let index = index" [pokemon]="pokemon" (onDelete)="onDeletePokemonClick(index)" />
+  </div>  
+  </ng-container>
+
+</div>

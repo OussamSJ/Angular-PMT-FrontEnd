@@ -1,0 +1,17 @@
+<p>details works!</p>
+
+<div *ngIf="isLoading">Chargement en cours...</div>
+
+<div *ngIf="!isLoading ">
+  <p class="error">projet introuvable</p>
+</div>
+
+<div *ngIf="!isLoading && pokemon">
+  <h1>{{ pokemon.name }}</h1>
+  <p>{{ pokemon.description }}</p>
+  <ul>
+    <li>Début : {{ pokemon.debutDate | date }}</li>
+    <li>Fin : {{ pokemon.finDate | date }}</li>
+    <li>Création : {{ pokemon.creationDate | date }}</li>
+  </ul>
+</div>

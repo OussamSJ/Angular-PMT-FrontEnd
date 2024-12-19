@@ -1,0 +1,25 @@
+<div class="row p-3 pokemon-item align-items-center mb-2" *ngIf="pokemon">
+  <div class="col-9">
+    <!-- Nom et ID du Pokémon -->
+    <h5 class="pokemon-name">{{ pokemon.name }}</h5>
+   
+
+    <!-- Date de création -->
+    <div class="pokemon-dates">
+      <p><strong>Date de création : </strong>{{ pokemon.creationDate | date: 'fullDate' }}</p>
+      <p><strong>Date de début : </strong>{{ pokemon.debutDate  }}</p>
+      <p><strong>Date de fin : </strong>{{ pokemon.finDate  }}</p>
+    </div>
+
+    <!-- Description -->
+    <div class="pokemon-description">
+      <h6>Description :</h6>
+      <p>{{ pokemon.description }}</p>
+    </div>
+  </div>
+
+  <!-- Bouton de suppression -->
+  <div class="col-3 text-end">
+    <button class="btn btn-danger" (click)="onDeletePokemonClick()">Supprimer</button>
+  </div>
+</div>
