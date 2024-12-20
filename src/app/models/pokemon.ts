@@ -12,5 +12,5 @@ export interface LocalPokemon {
 
 export interface Pokemon extends LocalPokemon {
   id:string;
-  idProjet?:number;
+
 }

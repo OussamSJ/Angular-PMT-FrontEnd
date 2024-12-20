@@ -17,6 +17,8 @@ import { GeneralComponent } from './pages/pokemon/general/general.component';
 import { DetailsComponent } from './pages/pokemon/details/details.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SignupComponent } from './pages/signup/signup.component';
+import { TaskComponent } from './pages//pokemon/details/tasks/tasks.component';
+
 registerLocaleData(localeFr);
 
 @NgModule({
@@ -29,7 +31,8 @@ registerLocaleData(localeFr);
     GeneralComponent,
     DetailsComponent,
     HeaderComponent,
-    SignupComponent
+    SignupComponent,
+    TaskComponent
   ],
   imports: [
     BrowserModule,

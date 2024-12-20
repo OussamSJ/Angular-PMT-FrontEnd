@@ -1,0 +1,19 @@
+<div *ngIf="isLoading" class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+  
+  <div *ngIf="!isLoading && tasks.length > 0">
+    <ul class="list-group">
+      <li *ngFor="let task of tasks" class="list-group-item">
+        <h5>{{ task.title }}</h5>
+        <p>{{ task.description }}</p>
+        <p><strong>Start Date:</strong> {{ task.startDate  }}</p>
+        <p><strong>End Date:</strong> {{ task.endDate }}</p>
+      </li>
+    </ul>
+  </div>
+  
+  <div *ngIf="!isLoading && tasks.length === 0">
+    <p>No tasks found for this project.</p>
+  </div>
+  

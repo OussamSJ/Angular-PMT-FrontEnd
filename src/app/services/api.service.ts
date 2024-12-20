@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LocalPokemon } from '../models/pokemon';
 import { LocalUser } from '../models/user';
+import { Task } from '../models/task';
 
 export interface PostResult {
   name: string;
@@ -27,8 +28,8 @@ export class ApiService {
     return this.http.post<PostResult>(`${this.apiUrl1}/projet`, pokemon);
   }
 
-  getPokemon(id: string) {
-    return this.http.get<LocalPokemon>(`${this.apiUrl1}/projet/${id}`);
+  getPokemon(name: string) {
+    return this.http.get<LocalPokemon>(`${this.apiUrl1}/projet/${name}`);
   }
 
   getPokemons() {
@@ -36,7 +37,8 @@ export class ApiService {
   }
 
   deletePokemon(id: string) {
-    return this.http.delete(`${this.apiUrl1}/projet/${id}`);
+    const encodedId = encodeURIComponent(id);
+    return this.http.delete(`${this.apiUrl1}/projet/name/${encodedId}`);
   }
 
   postUser(user: LocalUser) {
@@ -45,5 +47,13 @@ export class ApiService {
 
   getUsers() {
     return this.http.get<GetUsersResult>(`${this.apiUrl1}/users`);
+  }
+  
+  getTasksByProject(projectId: string) {
+    return this.http.get<Task[]>(`${this.apiUrl1}/projet/${projectId}/tasks`);
+  }
+  
+  addTaskToProject(projectId: string, task: Task) {
+    return this.http.post(`${this.apiUrl1}/projet/${projectId}/tasks`, task);
   }
 }

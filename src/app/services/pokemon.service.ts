@@ -70,7 +70,7 @@ export class PokemonService {
   }
 
   deletePokemon(index: number) {
-    this.apiService.deletePokemon(this.pokemons[index].id).subscribe();
+    this.apiService.deletePokemon(this.pokemons[index].name).subscribe();
     this.pokemons.splice(index, 1);
   }
 
