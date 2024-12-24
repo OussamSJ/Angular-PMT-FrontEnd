@@ -16,13 +16,9 @@
     <p><strong>Description :</strong> {{ pokemon.description }}</p>
   </div>
   
-  <ul class="nav nav-tabs">
-    <li class="nav-item" *ngFor="let tab of tabs">
-      <a class="nav-link" [routerLink]="['./' + tab.path]" routerLinkActive="active">{{ tab.name }}</a>
-    </li>
-  </ul>
-
-<router-outlet></router-outlet>
+  
+<div class="col-5">
+<app-tasks [projectId]="pokemon.name"></app-tasks></div>
 
 
 </div>

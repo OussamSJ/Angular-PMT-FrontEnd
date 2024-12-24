@@ -1,0 +1,57 @@
+/* Style pour le spinner de chargement */
+.spinner-border.text-primary {
+    width: 3rem;
+    height: 3rem;
+    margin: auto;
+    display: block;
+  }
+  
+  /* Liste des tâches */
+  .list-group {
+    margin-top: 20px;
+    background-color: #fff3cd; /* Jaune clair */
+    border-left: 5px solid #ffc107; /* Jaune */
+  }
+  
+  /* Tâches générales */
+  .list-group-item {
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    padding: 15px;
+  }
+  
+  /* Tâches de haute priorité */
+  .task-high {
+    background-color: #f8d7da; /* Rouge clair */
+    border-left: 5px solid #dc3545; /* Rouge */
+  }
+  
+  /* Tâches de priorité moyenne */
+  .task-medium {
+    background-color: #fff3cd; /* Jaune clair */
+    border-left: 5px solid #ffc107; /* Jaune */
+  }
+  
+  /* Tâches de basse priorité */
+  .task-low {
+    background-color: #d4edda; /* Vert clair */
+    border-left: 5px solid #28a745; /* Vert */
+  }
+  
+  /* Message pour aucune tâche */
+  .no-task-message {
+    
+  }  
+  .task-completed {
+    background-color: #e2e3e5; /* Gris clair */
+    border-left: 5px solid #6c757d; /* Gris */
+  }
+
+.completed-tasks {
+  flex: 1;
+  background-color: #f9f9f9;
+  border-left: 2px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+}

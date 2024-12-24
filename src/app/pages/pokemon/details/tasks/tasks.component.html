@@ -1,19 +1,54 @@
-<div *ngIf="isLoading" class="spinner-border text-primary" role="status">
-    <span class="visually-hidden">Loading...</span>
+<div *ngIf="!isLoading && tasks.length > 0" class="task-container">
+  <div class="task-column">
+    <h3>Haute priorité</h3>
+    <div *ngFor="let task of highPriorityTasks" class="list-group-item task-high">
+      <h4>{{ task.title }}</h4>
+      <p><strong>id</strong> {{task.id}}</p>
+      <p><strong>Date limite:</strong> {{ task.endDate }}</p>
+      <p><strong>Description:</strong> {{ task.description }}</p>
+      <button class="btn btn-success btn-sm" (click)="markAsCompleted(task)">Mark as Completed</button>
+    </div>
   </div>
-  
-  <div *ngIf="!isLoading && tasks.length > 0">
-    <ul class="list-group">
-      <li *ngFor="let task of tasks" class="list-group-item">
-        <h5>{{ task.title }}</h5>
-        <p>{{ task.description }}</p>
-        <p><strong>Start Date:</strong> {{ task.startDate  }}</p>
-        <p><strong>End Date:</strong> {{ task.endDate }}</p>
-      </li>
-    </ul>
+
+  <div class="task-column">
+    <h3>Priorité moyenne</h3>
+    <div *ngFor="let task of mediumPriorityTasks" class="list-group-item task-medium">
+      <h4>{{ task.title }}</h4>
+      <p><strong>id</strong> {{task.id}}</p>
+      <p><strong>Date limite:</strong> {{ task.endDate }}</p>
+      <p><strong>Description:</strong> {{ task.description }}</p>
+      <button class="btn btn-success btn-sm" (click)="markAsCompleted(task)">Mark as Completed</button>
+    </div>
   </div>
-  
-  <div *ngIf="!isLoading && tasks.length === 0">
-    <p>No tasks found for this project.</p>
+
+  <div class="task-column">
+    <h3>Faible priorité</h3>
+    <div *ngFor="let task of lowPriorityTasks" class="list-group-item task-low">
+      <h4>{{ task.title }}</h4>
+      <p><strong>id</strong> {{task.id}}</p>
+      <p><strong>Date limite:</strong> {{ task.endDate }}</p>
+      <p><strong>Description:</strong> {{ task.description }}</p>
+      <button class="btn btn-success btn-sm" (click)="markAsCompleted(task)">Mark as Completed</button>
+    </div>
   </div>
-  
+  <!-- Completed Tasks Column -->
+  <div class="task-column completed-tasks">
+    <h3 style="color:#6c757d ;">Completed Tasks</h3>
+    <div *ngFor="let task of completedTasks" class="list-group-item task-completed">
+      <h4>{{ task.title }}</h4>
+      <p><strong>id</strong> {{task.id}}</p>
+      <p><strong>Date limite:</strong> {{ task.endDate }}</p>
+      <p><strong>Description:</strong> {{ task.description }}</p>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="tasks && tasks.length === 0 && completedTasks.length === 0" class="no-task-message">
+  <p>Aucune tâche pour ce projet.</p>
+</div>
+
+
+
+
+

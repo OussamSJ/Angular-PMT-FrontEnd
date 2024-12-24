@@ -50,10 +50,18 @@ export class ApiService {
   }
   
   getTasksByProject(projectId: string) {
-    return this.http.get<Task[]>(`${this.apiUrl1}/projet/${projectId}/tasks`);
+    const encodedName = encodeURIComponent(projectId);
+    return this.http.get<Task[]>(`${this.apiUrl1}/projet/${encodedName}/tasks`);
   }
   
   addTaskToProject(projectId: string, task: Task) {
-    return this.http.post(`${this.apiUrl1}/projet/${projectId}/tasks`, task);
+    return this.http.post(`${this.apiUrl1}/projet/${projectId}/task`, task);
+  }
+
+  modifyTask(id: string, task: Task) {
+    const body = task;
+    body.status = 'terminee';
+    console.log(body);
+    return this.http.patch(`${this.apiUrl1}/task/${id}`, body);
   }
 }

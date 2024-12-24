@@ -22,4 +22,8 @@ export class TaskService {
   addTaskToProject(projectId: string, task: Task) {
     return this.apiService.addTaskToProject(projectId, task);
   }
+
+  modifyTask(id: string,task: Task) {
+    return this.apiService.modifyTask(id, task);
+  }
 }
