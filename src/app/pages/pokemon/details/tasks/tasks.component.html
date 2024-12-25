@@ -1,54 +1,144 @@
-<div *ngIf="!isLoading && tasks.length > 0" class="task-container">
-  <div class="task-column">
-    <h3>Haute priorité</h3>
-    <div *ngFor="let task of highPriorityTasks" class="list-group-item task-high">
-      <h4>{{ task.title }}</h4>
-      <p><strong>id</strong> {{task.id}}</p>
-      <p><strong>Date limite:</strong> {{ task.endDate }}</p>
-      <p><strong>Description:</strong> {{ task.description }}</p>
-      <button class="btn btn-success btn-sm" (click)="markAsCompleted(task)">Mark as Completed</button>
-    </div>
-  </div>
+<div class="container  mt-4">
+  <h3 class="mb-5">Ajouter des tâches</h3>
 
-  <div class="task-column">
-    <h3>Priorité moyenne</h3>
-    <div *ngFor="let task of mediumPriorityTasks" class="list-group-item task-medium">
-      <h4>{{ task.title }}</h4>
-      <p><strong>id</strong> {{task.id}}</p>
-      <p><strong>Date limite:</strong> {{ task.endDate }}</p>
-      <p><strong>Description:</strong> {{ task.description }}</p>
-      <button class="btn btn-success btn-sm" (click)="markAsCompleted(task)">Mark as Completed</button>
-    </div>
-  </div>
+  <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+    <div class="row  col-12 mb-4">
+      <!-- Champ "titre de la tâche" -->
+      <div class="mb-3">
+        <label for="title" class="form-label">Titre</label>
+        <input 
+          type="text" 
+          id="title" 
+          class="form-control" 
+          formControlName="title" 
+          placeholder="Titre de la tâche" 
+        />
+        <div *ngIf="taskForm.get('title')?.touched && taskForm.get('title')?.invalid" class="text-danger mt-1">
+          Le titre est obligatoire.
+        </div>
+      </div>
 
-  <div class="task-column">
-    <h3>Faible priorité</h3>
-    <div *ngFor="let task of lowPriorityTasks" class="list-group-item task-low">
-      <h4>{{ task.title }}</h4>
-      <p><strong>id</strong> {{task.id}}</p>
-      <p><strong>Date limite:</strong> {{ task.endDate }}</p>
-      <p><strong>Description:</strong> {{ task.description }}</p>
-      <button class="btn btn-success btn-sm" (click)="markAsCompleted(task)">Mark as Completed</button>
+       <!-- Champ "priority" -->
+       <div class="col-5 mb-3">
+        <label for="priority" class="form-label">Priorité</label>
+        <select id="priority" class="form-select" formControlName="priority">
+          <option value="">Sélectionnez une priorité</option>
+          <option value="high">Élevée</option>
+          <option value="medium">Moyenne</option>
+          <option value="low">Basse</option>
+        </select>
+        <div *ngIf="taskForm.get('priority')?.touched && taskForm.get('priority')?.invalid" class="text-danger mt-1">
+          La priorité est obligatoire.
+        </div>
+      </div>
+
+      
+      <!-- Champ "startDate" -->
+      <div class="col-3 mb-3">
+        <label for="startDate" class="form-label">Date de début</label>
+        <input 
+          type="date" 
+          id="startDate" 
+          class="form-control" 
+          formControlName="startDate"
+        />
+        <div *ngIf="taskForm.get('startDate')?.touched && taskForm.get('startDate')?.invalid" class="text-danger mt-1">
+          La date de début est obligatoire.
+        </div>
+      </div>
+
+      <!-- Champ "endDate" -->
+      <div class="col-3 mb-3">
+        <label for="endDate" class="form-label">Date de fin</label>
+        <input 
+          type="date" 
+          id="endDate" 
+          class="form-control" 
+          formControlName="endDate"
+        />
+        <div *ngIf="taskForm.get('endDate')?.touched && taskForm.get('endDate')?.invalid" class="text-danger mt-1">
+          La date de fin est obligatoire.
+        </div>
+      </div>
+
+
+      <!-- Champ "description" -->
+      <div class="col-12 mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea 
+          id="description" 
+          class="form-control" 
+          formControlName="description" 
+          placeholder="Description de la tâche"
+        ></textarea>
+        <div *ngIf="taskForm.get('description')?.touched && taskForm.get('description')?.invalid" class="text-danger mt-1">
+          La description est obligatoire.
+        </div>
+      </div>
+
+     
+
+      <!-- Bouton de soumission -->
+      <div class="col-12 mt-4 mb-4 text-end">
+        <button type="submit" class="btn btn-primary" [disabled]="taskForm.invalid">Ajouter la tâche</button>
+      </div>
     </div>
-  </div>
-  <!-- Completed Tasks Column -->
-  <div class="task-column completed-tasks">
-    <h3 style="color:#6c757d ;">Completed Tasks</h3>
-    <div *ngFor="let task of completedTasks" class="list-group-item task-completed">
-      <h4>{{ task.title }}</h4>
-      <p><strong>id</strong> {{task.id}}</p>
-      <p><strong>Date limite:</strong> {{ task.endDate }}</p>
-      <p><strong>Description:</strong> {{ task.description }}</p>
+  </form>
+</div>
+
+
+
+<div *ngIf="!isLoading && tasks.length > 0" class="task-container mt-4">
+  <div class="row">
+    <!-- Colonne des tâches haute priorité -->
+    <div class="col-md-3 task-column mb-4">
+      <h3>Haute priorité</h3>
+      <div *ngFor="let task of highPriorityTasks" class="list-group-item task-high">
+        <h4>{{ task.title }}</h4>
+        <p><strong>ID:</strong> {{task.id}}</p>
+        <p><strong>Date limite:</strong> {{ task.endDate }}</p>
+        <p><strong>Description:</strong> {{ task.description }}</p>
+        <button class="btn btn-success btn-sm" (click)="markAsCompleted(task)">Mark as Completed</button>
+      </div>
+    </div>
+
+    <!-- Colonne des tâches priorité moyenne -->
+    <div class="col-md-3 task-column mb-4">
+      <h3>Priorité moyenne</h3>
+      <div *ngFor="let task of mediumPriorityTasks" class="list-group-item task-medium">
+        <h4>{{ task.title }}</h4>
+        <p><strong>ID:</strong> {{task.id}}</p>
+        <p><strong>Date limite:</strong> {{ task.endDate }}</p>
+        <p><strong>Description:</strong> {{ task.description }}</p>
+        <button class="btn btn-success btn-sm" (click)="markAsCompleted(task)">Mark as Completed</button>
+      </div>
+    </div>
+
+    <!-- Colonne des tâches faible priorité -->
+    <div class="col-md-3 task-column mb-4">
+      <h3>Faible priorité</h3>
+      <div *ngFor="let task of lowPriorityTasks" class="list-group-item task-low">
+        <h4>{{ task.title }}</h4>
+        <p><strong>ID:</strong> {{task.id}}</p>
+        <p><strong>Date limite:</strong> {{ task.endDate }}</p>
+        <p><strong>Description:</strong> {{ task.description }}</p>
+        <button class="btn btn-success btn-sm" (click)="markAsCompleted(task)">Mark as Completed</button>
+      </div>
+    </div>
+
+    <!-- Colonne des tâches terminées -->
+    <div class="col-md-3 task-column mb-4 completed-tasks">
+      <h3 style="color:#6c757d;">Tâches terminées</h3>
+      <div *ngFor="let task of completedTasks" class="list-group-item task-completed">
+        <h4>{{ task.title }}</h4>
+        <p><strong>ID:</strong> {{task.id}}</p>
+        <p><strong>Date limite:</strong> {{ task.endDate }}</p>
+        <p><strong>Description:</strong> {{ task.description }}</p>
+      </div>
     </div>
   </div>
 </div>
-
 
 <div *ngIf="tasks && tasks.length === 0 && completedTasks.length === 0" class="no-task-message">
   <p>Aucune tâche pour ce projet.</p>
 </div>
-
-
-
-
-

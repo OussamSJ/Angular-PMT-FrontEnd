@@ -62,6 +62,6 @@ export class ApiService {
     const body = task;
     body.status = 'terminee';
     console.log(body);
-    return this.http.patch(`${this.apiUrl1}/task/${id}`, body);
+    return this.http.put(`${this.apiUrl1}/task/${id}`, task);
   }
 }
