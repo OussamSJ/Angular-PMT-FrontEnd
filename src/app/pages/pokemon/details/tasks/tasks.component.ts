@@ -74,7 +74,13 @@ export class TaskComponent implements OnInit, OnChanges {
     this.mediumPriorityTasks = this.mediumPriorityTasks.filter(t => t !== task);
     this.lowPriorityTasks = this.lowPriorityTasks.filter(t => t !== task);
     //this.loadTasks();
-    this.taskService.modifyTask(task.id, task);
+   // this.taskService.modifyTask(task.id, task);
+    this.taskService.modifyTask(task.id, task).subscribe(response => {
+      // Traitez la réponse si nécessaire
+  }, error => {
+      console.error('Erreur lors de la mise à jour de la tâche', error);
+  });
+  
   }
 
   loadTasks() {
