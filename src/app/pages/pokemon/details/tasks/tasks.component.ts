@@ -2,6 +2,8 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
 import { Task } from 'src/app/models/task';
 import { TaskService } from 'src/app/services/task.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import emailjs from '@emailjs/browser';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-tasks',
@@ -14,6 +16,7 @@ export class TaskComponent implements OnInit, OnChanges {
   @Input() projectId!: string;
   @Input() index!: number;
   @Input() tasks: Task[] = [];
+  @Input() user: User;
   isLoading = true;
   highPriorityTasks: Task[] = [];
   mediumPriorityTasks: Task[] = [];
@@ -39,7 +42,7 @@ export class TaskComponent implements OnInit, OnChanges {
   onSubmit() { 
     if (this.taskForm.valid) { 
       const newTask: Task = { 
-        id: '', // Assurez-vous que le backend attribue un ID unique
+        id: '', // Assurer que le backend attribue un ID unique
         title: this.taskForm.value.title, 
         description: this.taskForm.value.description, 
         priority: this.taskForm.value.priority, 
@@ -47,6 +50,8 @@ export class TaskComponent implements OnInit, OnChanges {
         startDate: new Date(this.taskForm.value.startDate), 
         endDate: new Date(this.taskForm.value.endDate) 
       }; 
+
+   this.send();
   
       this.taskService.addTaskToProject(this.projectId, newTask).subscribe(response => { 
         console.log('Task added successfully', response);  
@@ -66,15 +71,13 @@ export class TaskComponent implements OnInit, OnChanges {
   markAsCompleted(task: Task) {
   
     // Add task to completed tasks
-   // this.completedTasks = this.tasks.filter(task => task.status === 'terminee');
     this.completedTasks.push(task);
    
     // Remove task from the current priority list
     this.highPriorityTasks = this.highPriorityTasks.filter(t => t !== task);
     this.mediumPriorityTasks = this.mediumPriorityTasks.filter(t => t !== task);
     this.lowPriorityTasks = this.lowPriorityTasks.filter(t => t !== task);
-    //this.loadTasks();
-   // this.taskService.modifyTask(task.id, task);
+  
     this.taskService.modifyTask(task.id, task).subscribe(response => {
       // Traitez la réponse si nécessaire
   }, error => {
@@ -93,4 +96,19 @@ export class TaskComponent implements OnInit, OnChanges {
       this.isLoading = false;
     });
   }
+
+  send(){
+    emailjs.init('DKSIxFpd_pd32N-Za');
+    emailjs.send("service_w3w2q29","pmt",{
+      title: this.taskForm.value.title,
+      to_name: ,
+      Project: this.projectId,
+      endDate: this.taskForm.value.endDate,
+      priority: this.taskForm.value.priority,
+      description: this.taskForm.value.description,
+      });
+  
+  
+  
+  };
 }
