@@ -25,6 +25,7 @@
   
   .d-flex {
     display: flex;
+    color: white;
     align-items: center;
   }
   
@@ -48,5 +49,19 @@
   
   .ms-2 {
     margin-left: 10px;
+  }
+  
+  .header {
+    .dropdown {
+      .dropdown-menu {
+        min-width: 200px;
+      }
+      .dropdown-item {
+        font-size: 14px;
+      }
+      .text-danger {
+        color: #dc3545 !important;
+      }
+    }
   }
   

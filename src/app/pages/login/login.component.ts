@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { UserService } from 'src/app/services/user.service';  
+
 
 @Component({
   selector: 'app-login',
@@ -12,8 +14,9 @@ export class LoginComponent {
   loginForm!: FormGroup;
   loginError = false;
   isLoading = false;
+ 
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService, private router: Router, private userService: UserService) {
     this.createForm();
   }
 
@@ -30,7 +33,9 @@ export class LoginComponent {
     if (this.loginForm.invalid) return;
     this.isLoading = true;
     try {
+      const email = this.loginForm.value.email;
       await this.authService.login(this.loginForm.value.email, this.loginForm.value.password);
+      this.userService.setCurrentUserEmail(email); // Stockez l'email ici
       this.router.navigate(['/']);
     } catch (error: any) {
       this.loginError = true;

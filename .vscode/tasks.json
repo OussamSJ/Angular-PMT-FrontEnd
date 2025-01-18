@@ -1,5 +1,4 @@
 {
-  // For more information, visit: https://go.microsoft.com/fwlink/?LinkId=733558
   "version": "2.0.0",
   "tasks": [
     {
@@ -35,7 +34,11 @@
           "endsPattern": {
             "regexp": "bundle generation complete"
           }
-        }
+        },
+        "options": {
+          "cwd": "${workspaceFolder}"
+        },
+        "args": ["--", "--no-watch", "--code-coverage"]
       }
     }
   ]

@@ -6,6 +6,7 @@
     </a>
 
     <div class="d-flex align-items-center">
+      <span *ngIf="email" class="me-3"> connecté(e) en tant que : {{ email }} </span>
       <button class="btn btn-danger ms-2" (click)="logout()">Se déconnecter</button>
     </div>
   </div>

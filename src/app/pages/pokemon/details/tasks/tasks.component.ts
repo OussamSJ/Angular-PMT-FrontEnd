@@ -3,7 +3,7 @@ import { Task } from 'src/app/models/task';
 import { TaskService } from 'src/app/services/task.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import emailjs from '@emailjs/browser';
-import { User } from 'src/app/models/user';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-tasks',
@@ -16,14 +16,13 @@ export class TaskComponent implements OnInit, OnChanges {
   @Input() projectId!: string;
   @Input() index!: number;
   @Input() tasks: Task[] = [];
-  @Input() user: User;
   isLoading = true;
   highPriorityTasks: Task[] = [];
   mediumPriorityTasks: Task[] = [];
   lowPriorityTasks: Task[] = [];
   completedTasks: any[] = [];
   taskForm: FormGroup;
-  constructor(private fb: FormBuilder,private taskService: TaskService) {
+  constructor(private fb: FormBuilder, private taskService: TaskService, private userService: UserService) {
     this.taskForm = this.fb.group({ 
       title: ['', Validators.required], 
       description: ['', Validators.required], 
@@ -69,15 +68,12 @@ export class TaskComponent implements OnInit, OnChanges {
   
   
   markAsCompleted(task: Task) {
-  
     // Add task to completed tasks
     this.completedTasks.push(task);
-   
     // Remove task from the current priority list
     this.highPriorityTasks = this.highPriorityTasks.filter(t => t !== task);
     this.mediumPriorityTasks = this.mediumPriorityTasks.filter(t => t !== task);
     this.lowPriorityTasks = this.lowPriorityTasks.filter(t => t !== task);
-  
     this.taskService.modifyTask(task.id, task).subscribe(response => {
       // Traitez la réponse si nécessaire
   }, error => {
@@ -98,17 +94,21 @@ export class TaskComponent implements OnInit, OnChanges {
   }
 
   send(){
+    const email = this.userService.getCurrentUserEmail();
+  if (!email) {
+    console.error('Email utilisateur non défini');
+    return;
+  }
     emailjs.init('DKSIxFpd_pd32N-Za');
     emailjs.send("service_w3w2q29","pmt",{
       title: this.taskForm.value.title,
-      to_name: ,
+      to_name: "Cher collaborateur",
       Project: this.projectId,
       endDate: this.taskForm.value.endDate,
       priority: this.taskForm.value.priority,
       description: this.taskForm.value.description,
+      email: email,
       });
-  
-  
   
   };
 }
