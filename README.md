@@ -39,6 +39,34 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
 
+## Déploiement avec Docker
+
+Voici les étapes pour déployer et exécuter l'application backend à l'aide de Docker.
+
+
+### Prérequis
+- [Docker](https://docs.docker.com/get-docker/) doit être installé sur votre machine.
+
+### Étapes de déploiement
+
+1. **Télécharger l'image Docker depuis Docker Hub** :
+   ```bash
+   docker pull oussamasj179/angular-pmt-frontend:latest
+   ```
+   ---
+   
+2. **Exécuter le conteneur** :
+   ```bash
+   docker run -p 8080:8080 oussamasj179/angular-pmt-frontend:latest
+   ```
+   ---
+
+ 3. **Lancer l'application** :
+   ```lien
+   http://localhost:4200
+   ```
+   ---
+
 
 
 
