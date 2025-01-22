@@ -1,4 +1,5 @@
 # Projet PMT
+![Angular](https://img.shields.io/badge/Angular-red)
 
 Le frontend de l'application est développé avec Angular, offrant une interface utilisateur moderne et intuitive.
 
